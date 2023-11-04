@@ -21,9 +21,9 @@ def parameters(yaml_name: str):
     params.search_size = cfg.TEST.SEARCH_SIZE
 
     # Network checkpoint path
-    # params.checkpoint = os.path.join(save_dir, "checkpoints/train/spt/%s/SPT_ep%04d.pth.tar" %
-    #                                  (yaml_name, cfg.TEST.EPOCH))
-    params.checkpoint = '/data/Disk_E/xuefeng/2023IJCV/SPT/SPT.pth.tar'
+    params.checkpoint = os.path.join(save_dir, "checkpoints/train/spt/%s/SPT_ep%04d.pth.tar" %
+                                     (yaml_name, cfg.TEST.EPOCH))
+
     # whether to save boxes from all queries
     params.save_all_boxes = False
 
