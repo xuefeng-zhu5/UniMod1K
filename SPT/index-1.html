@@ -1,0 +1,54 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>未知 </title></head><body>
+<h1 id="unimod1k-towards-a-more-universal-large-scale-dataset-and-benchmark-for-multi-modal-learning">UniMod1K: Towards a More Universal Large-Scale Dataset and Benchmark for Multi-Modal Learning</h1>
+<p>The official implementation of the multi-modal (Vision, Depth and Language) SPT tracker of the paper <strong>UniMod1K: Towards a More Universal Large-Scale Dataset and Benchmark for Multi-Modal Learning</strong></p>
+<p/><center><img width="75%" alt="" src="spt_vdl_framework-1.jpg"/></center><p/>
+<h2 id="usage">Usage</h2>
+<h3 id="installation">Installation</h3>
+<p>Install the environment using Anaconda
+<code>conda create -n spt python=3.6
+conda activate spt
+bash install_pytorch17.sh
+cd /path/to/UniMod1K/SPT</code></p>
+<h3 id="data-preparation">Data Preparation</h3>
+<p>The training dataset is the [<strong>UniMod1K</strong>]
+<code>--UniMod1K
+    |--Adapter
+        |--adapter1
+        |--adapter2
+        ...
+    |--Animal
+       |--alpaca1
+       |--bear1
+        ...
+    ...</code></p>
+<h3 id="set-project-paths">Set project paths</h3>
+<p>Run the following command to set paths for this project
+<code>python tracking/create_default_local_file.py --workspace_dir . --data_dir ./data --save_dir .</code></p>
+<p>After running this command, you can also modify paths by editing these two files
+<code>lib/train/admin/local.py  # paths about training
+lib/test/evaluation/local.py  # paths about testing</code></p>
+<h3 id="training">Training</h3>
+<p>Download the pretrained weight [<a href="https://drive.google.com/drive/folders/1Fi-4TSaIP4B_TPi2Jme2sxZRdH9l5NPN?usp=share_link">BERT pretrained weight</a>] put it under <code>$PROJECT_ROOT$/pretrained_models</code>. 
+Set the MODEL.LANGUAGE.PATH and MODEL.LANGUAGE.VOCAB_PATH in ./experiments/spt/unimod1k.yaml.</p>
+<p>Download the pretrained <a href="https://drive.google.com/drive/folders/142sMjoT5wT6CuRiFT5LLejgr7VLKmaC4">Stark-s model</a>
+and put it under <code>$PROJECT_ROOT$/pretrained_models/</code>. 
+Set the MODEL.PRETRAINED path in ./experiments/spt/unimod1k.yaml.</p>
+<p>Training with multiple GPUs using DDP (4 RTX3090Ti with batch size of 16)
+<code>export PYTHONPATH=/path/to/SPT:$PYTHONPATH
+python -m torch.distributed.launch --nproc_per_node=4 ./lib/train/run_training.py</code>
+or using single GPU:
+<code>python ./lib/train/run_training.py</code></p>
+<h3 id="test">Test</h3>
+<p>Edit ./lib/test/evaluation/local.py to set the test set path, then run
+<code>python ./tracking/test.py</code>
+You can also use the <a href="https://drive.google.com/file/d/1aU1FWERBab0aGR9nxwN138JG1lLQlnU5/view?usp=drive_link">pre-trained model</a>, 
+and set the path in ./lib/test/parameter/spt.py</p>
+<h3 id="evaluation">Evaluation</h3>
+<p>Put the raw results in the <a href="https://github.com/votchallenge/toolkit">VOT Toolkit</a> workspace, then use the command of vot analysis. The tutorial of VOT Toolkit can be found <a href="https://www.votchallenge.net/howto/overview.html">here</a>.</p>
+<h2 id="acknowledgment">Acknowledgment</h2>
+<ul>
+<li>This repo is based on <a href="https://github.com/researchmm/Stark">Stark</a> which is an excellent work.</li>
+</ul>
+<h2 id="contact">Contact</h2>
+<p>If you have any question, please feel free to <a href="xuefeng_zhu95@163.com">contact us</a>(xuefeng_zhu95@163.com)</p>
+</body></html>
