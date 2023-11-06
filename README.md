@@ -65,7 +65,7 @@ The natural language files:
 
 ## Dataset Format
 The RGB images are saved in the 24-bit JPEG format with 8 bits allocated to each channel, whereas the depth maps are saved in the 16-bit PNG format.
-For the labels, the format of rectangle bounding boxes is as [x1, y1, w, h]. (x1, y1) is the top-left corner of targeted object, while the w and h are the width and height of the target bounding box.
+For the labels, the format of rectangle bounding boxes is as [x1, y1, w, h]. (x1, y1) is the top-left corner of a targeted object, while the w and h are the width and height of the target bounding box.
 
 ## Data Visualisation
 After downloading the data and corresponding label files, you can visualise the samples by:
